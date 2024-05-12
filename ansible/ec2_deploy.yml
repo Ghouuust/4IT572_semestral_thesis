@@ -16,6 +16,7 @@
         vpc_subnet_id: subnet-0bb7b3aa91dcdcb90
         tags:
           Name: Eshop
+          Deployment: "{{ lookup('env', 'GITHUB_RUN_ID') }}"
         network:
           assign_public_ip: yes
         wait: yes
@@ -85,3 +86,12 @@
       wait_for:
         port:
           80
+
+    - name: Terminate old EC2 instances
+      ec2_instance:
+        state: absent
+        filters:
+          "tag:Deployment": "{{ lookup('env', 'PREVIOUS_GITHUB_RUN_ID') }}"
+        aws_access_key: "{{ access_key }}"
+        aws_secret_key: "{{ secret_key }}"
+        security_token: "{{ session_token }}"
