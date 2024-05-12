@@ -9,11 +9,11 @@
   tasks:
     - name: Launch EC2 Instance
       ec2_instance:
-        instance_type: t3.medium
-        image_id: ami-051f8a213df8bc089
+        instance_type: t2.medium
+        image_id: ami-04e5276ebb8451442
         region: us-east-1
         key_name: Test
-        vpc_subnet_id: subnet-09673e61364597e15
+        vpc_subnet_id: subnet-0bb7b3aa91dcdcb90
         tags:
           Name: Eshop
         network:
