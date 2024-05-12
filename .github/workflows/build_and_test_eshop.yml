@@ -91,3 +91,23 @@ jobs:
       - name: Run tests
         run: |
           npm run test -- --u
+
+  Deploy:
+    needs: [ Build, Test ]
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+        with:
+          token: ${{ secrets.WORKFLOW_TOKEN }}
+
+      - name: Load Node modules and build folder
+        uses: actions/cache@v4.0.2
+        with:
+          path: |
+            ~/.npm
+            ./node_modules
+            ./build
+          key: ${{ runner.os }}-build-${{ github.run_id }}
