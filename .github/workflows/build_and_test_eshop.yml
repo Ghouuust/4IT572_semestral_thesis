@@ -122,7 +122,7 @@ jobs:
       - name: Setup Ansible
         uses: dawidd6/action-ansible-playbook@v2.8.0
         with:
-          playbook: 'ansible/ansible.yml'
+          playbook: 'ansible/ec2_deploy.yml'
           key: ~/.ssh/Test.pem'
         env:
           ANSIBLE_HOST_KEY_CHECKING: "False"
