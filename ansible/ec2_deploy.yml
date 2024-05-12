@@ -43,6 +43,8 @@
   hosts: launched
   connection: ssh
   become: yes
+  vars:
+    ansible_user: ec2-user
 
   tasks:
     - name: Install Git and Docker
