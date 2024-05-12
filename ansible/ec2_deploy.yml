@@ -1,6 +1,10 @@
 - name: Deploy to EC2
   hosts: localhost
   connection: local
+  vars:
+    aws_access_key: "{{ lookup('env', 'ACCESS_KEY') }}"
+    aws_secret_key: "{{ lookup('env', 'SECRET_KEY') }}"
+    aws_session_token: "{{ lookup('env', 'SESSION_TOKEN') }}"
 
   tasks:
     - name: Launch EC2 Instance
@@ -17,9 +21,9 @@
         wait: yes
         count: 1
         security_group: eshop
-        aws_access_key: "{{ secrets.access_key }}"
-        aws_secret_key: "{{ secrets.secret_key }}"
-        security_token: "{{ secrets.session_token }}"
+        aws_access_key: "{{ access_key }}"
+        aws_secret_key: "{{ secret_key }}"
+        security_token: "{{ session_token }}"
       register: ec2_instance_result
 
     - name: Add instance host to group
