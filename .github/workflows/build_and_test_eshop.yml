@@ -111,3 +111,14 @@ jobs:
             ./node_modules
             ./build
           key: ${{ runner.os }}-build-${{ github.run_id }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5.1.0
+
+      - name: Install ansible
+        run: |
+            pip3 install ansible boto boto3
+
+      - name: Setup SSH Key
+        run: |
+
