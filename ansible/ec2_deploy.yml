@@ -17,9 +17,9 @@
         wait: yes
         count: 1
         security_group: eshop
-        aws_access_key: "{{ access_key }}"
-        aws_secret_key: "{{ secret_key }}"
-        security_token: "{{ session_token }}"
+        aws_access_key: "{{ secrets.access_key }}"
+        aws_secret_key: "{{ secrets.secret_key }}"
+        security_token: "{{ secrets.session_token }}"
       register: ec2_instance_result
 
     - name: Add instance host to group
