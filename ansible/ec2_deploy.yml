@@ -1,20 +1,20 @@
-- name: Delete old EC2 instances
-  hosts: localhost
-  connection: local
-  vars:
-    access_key: "{{ lookup('env', 'ACCESS_KEY') }}"
-    secret_key: "{{ lookup('env', 'SECRET_KEY') }}"
-    session_token: "{{ lookup('env', 'SESSION_TOKEN') }}"
-  tasks:
-    - name: Terminate existing EC2 instances
-      ec2_instance:
-        state: absent
-        filters:
-          "tag:Name": "Eshop"
-        region: us-east-1
-        aws_access_key: "{{ access_key }}"
-        aws_secret_key: "{{ secret_key }}"
-        security_token: "{{ session_token }}"
+#- name: Delete old EC2 instances
+  #hosts: localhost
+  #connection: local
+  #vars:
+    #access_key: "{{ lookup('env', 'ACCESS_KEY') }}"
+    #secret_key: "{{ lookup('env', 'SECRET_KEY') }}"
+    #session_token: "{{ lookup('env', 'SESSION_TOKEN') }}"
+  #tasks:
+    #- name: Terminate existing EC2 instances
+      #ec2_instance:
+        #state: absent
+        #filters:
+          #"tag:Name": "Eshop"
+        #region: us-east-1
+        #aws_access_key: "{{ access_key }}"
+        #aws_secret_key: "{{ secret_key }}"
+        #security_token: "{{ session_token }}"
 
 - name: Deploy to EC2
   hosts: localhost
