@@ -87,11 +87,11 @@
         port:
           80
 
-   # - name: Terminate old EC2 instances
-      #ec2_instance:
-        #state: absent
-        #filters:
-          #"tag:Deployment": "{{ lookup('env', 'PREVIOUS_GITHUB_RUN_ID') }}"
-        #aws_access_key: "{{ access_key }}"
-        #aws_secret_key: "{{ secret_key }}"
-        #security_token: "{{ session_token }}"
+    - name: Terminate old EC2 instances
+      ec2_instance:
+        state: absent
+        filters:
+          "tag:Deployment": "{{ lookup('env', 'PREVIOUS_GITHUB_RUN_ID') }}"
+        aws_access_key: "{{ access_key }}"
+        aws_secret_key: "{{ secret_key }}"
+        security_token: "{{ session_token }}"
