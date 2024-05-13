@@ -105,7 +105,7 @@
         port:
           80
 
-#- name: Delete old EC2 instances
+##- name: Delete old EC2 instances
  # hosts: localhost
   #connection: local
   #vars:
