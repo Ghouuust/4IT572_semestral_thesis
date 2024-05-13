@@ -116,7 +116,7 @@
         aws_secret_key: "{{ secret_key }}"
         security_token: "{{ session_token }}"
       loop: "{{ ec2_facts.instances }}"
-      when: "item.instance_id !== ec2_instance_result.id"
+      when: "item.instance_id != ec2_instance_result.id"
       failed_when: "item.instance_id == ec2_instance_result.id"
       #with_items: "{{ ec2_facts.instances }}"
       #failed_when: "item.instance_id = ec2_instance_result"
