@@ -120,6 +120,6 @@
       #failed_when: "item.instance_id = ec2_instance_result"
       loop: "{{ ec2_facts.instances }}"
       when: "item.tags.DeploymentTime < current_time"
-      failed_when: "item.tags.DeploymentTime = current_time"
+      failed_when: "item.tags.DeploymentTime == current_time"
 
 
