@@ -1,3 +1,21 @@
+- name: Delete old EC2 instances
+  hosts: localhost
+  connection: local
+  vars:
+    access_key: "{{ lookup('env', 'ACCESS_KEY') }}"
+    secret_key: "{{ lookup('env', 'SECRET_KEY') }}"
+    session_token: "{{ lookup('env', 'SESSION_TOKEN') }}"
+  tasks:
+    - name: Terminate existing EC2 instances
+      ec2_instance:
+        state: absent
+        filters:
+          "tag:Name": "Eshop"
+        region: us-east-1
+        aws_access_key: "{{ access_key }}"
+        aws_secret_key: "{{ secret_key }}"
+        security_token: "{{ session_token }}"
+
 - name: Deploy to EC2
   hosts: localhost
   connection: local
@@ -16,7 +34,6 @@
         vpc_subnet_id: subnet-0bb7b3aa91dcdcb90
         tags:
           Name: Eshop
-          Deployment: "{{ lookup('env', 'GITHUB_RUN_ID') }}"
         network:
           assign_public_ip: yes
         wait: yes
@@ -86,12 +103,3 @@
       wait_for:
         port:
           80
-
-    - name: Terminate old EC2 instances
-      ec2_instance:
-        state: absent
-        filters:
-          "tag:Deployment": "{{ lookup('env', 'PREVIOUS_GITHUB_RUN_ID') }}"
-        aws_access_key: "{{ access_key }}"
-        aws_secret_key: "{{ secret_key }}"
-        security_token: "{{ session_token }}"
